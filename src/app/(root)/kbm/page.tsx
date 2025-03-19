@@ -1,13 +1,12 @@
 'use client';
-
-import { InformationClass } from "@/components/pages/home/InformationClass";
+import { InformationKbm } from "@/components/pages/home/InformationKbm";
 
 export default function Page() {
   
 
   return (
     <>
-      <InformationClass />
+      <InformationKbm />
     </>
   );
 }

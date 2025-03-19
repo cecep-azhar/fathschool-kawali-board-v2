@@ -120,6 +120,8 @@ export interface Class {
   percentage_present: string;
   percentage_absent: string;
   percentage_leave: string;
+  percentage_active_class: string;
+  percentage_empty_class: string;
   active_class: number;
   empty_class: number;
   total_class: number;
