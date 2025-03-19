@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetData } from "@/lib/hooks/GET/useGetData";
 import { getCurrentDate, getCurrentTime } from "@/lib/utils/moment";
 import Image from "next/image";
@@ -10,9 +10,7 @@ import {
   Modal,
   ModalBody,
   ModalContent,
-  ModalHeader,
   useDisclosure,
-  Button,
 } from "@nextui-org/react";
 import { Monitor } from "lucide-react";
 import Link from "next/link";
@@ -20,10 +18,21 @@ import Link from "next/link";
 export const NavBar = () => {
   const { data } = useGetData("others");
   const quotes = data?.data?.data?.quote_of_the_day;
-  const { isOpen, onOpen, onClose } = useDisclosure(); // Modal state
+  const { isOpen, onOpen, onClose } = useDisclosure(); // State untuk modal
 
-  // Gabungkan quotes menjadi satu string
-  const marqueeText = quotes?.join("  •  ") || null;
+  // Gunakan state untuk memastikan modal hanya muncul sekali
+  const [hasOpenedModal, setHasOpenedModal] = useState(false);
+
+  // Saat halaman pertama kali dimuat, tampilkan modal
+  useEffect(() => {
+    if (!hasOpenedModal) {
+      onOpen();
+      setHasOpenedModal(true);
+    }
+  }, [hasOpenedModal, onOpen]);
+
+  // Gabungkan quotes menjadi satu string untuk Marquee
+  const marqueeText = quotes?.join("  •  ") || "Selamat datang di SMKN 1 Kawali!";
 
   return (
     <nav className="bg-zinc-900 shadow-xl px-8">
@@ -68,11 +77,10 @@ export const NavBar = () => {
         </Marquee>
       </div>
 
-      {/* Modal Konfirmasi Refresh */}
+      {/* Modal Pilihan Dashboard */}
       <Modal isOpen={isOpen} onClose={onClose} size="5xl">
         <ModalContent className="py-8 rounded-2xl shadow-lg">
           <ModalBody>
-            {/* Judul dengan Font Lebih Besar */}
             <p className="text-center text-2xl sm:text-3xl font-bold mb-6">
               Pilih Dashboard yang Ingin Dilihat:
             </p>
