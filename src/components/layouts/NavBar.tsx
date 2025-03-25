@@ -104,10 +104,12 @@ export const NavBar = () => {
               </Link>
 
               {/* IoT */}
-              <div className="rounded-2xl p-8 shadow-lg flex flex-col items-center w-full h-56 sm:h-64 flex-grow bg-gradient-to-r from-[#5A9BFF] to-[#3036A0] text-white">
+              <Link href="/iot" className="w-full">
+              <div className="cursor pointer rounded-2xl p-8 shadow-lg flex flex-col items-center w-full h-56 sm:h-64 flex-grow bg-gradient-to-r from-[#5A9BFF] to-[#3036A0] text-white">
                 <Monitor className="w-24 h-24 sm:w-28 sm:h-28 text-white" />
                 <p className="mt-6 text-xl sm:text-2xl font-bold">IoT</p>
               </div>
+              </Link>
             </div>
           </ModalBody>
         </ModalContent>
