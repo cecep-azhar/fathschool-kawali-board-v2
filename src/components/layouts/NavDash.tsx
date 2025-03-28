@@ -1,6 +1,6 @@
 "use client";
 
-import { Icons } from "@/lib/resource/IconExport";
+import { FaHome, FaUser, FaBell, FaCog, FaSun, FaMoon } from "react-icons/fa";
 import { useTheme } from "@/lib/utils/useTheme";
 import {
   Button,
@@ -15,29 +15,24 @@ import {
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-export const Menu = [
+const Menu = [
   {
-    icon: Icons.home,
+    icon: FaHome,
     name: "Beranda",
     link: "/",
   },
-  // {
-  //   icon: Icons.infoBold,
-  //   name: "Kondisi Sekolah",
-  //   link: "/dashboard/school-condition",
-  // },
   {
-    icon: Icons.profile,
+    icon: FaUser,
     name: "Profil",
     link: "/profile",
   },
   {
-    icon: Icons.notification,
+    icon: FaBell,
     name: "Notifikasi",
     link: "/notification",
   },
   {
-    icon: Icons.settings,
+    icon: FaCog,
     name: "Pengaturan",
     link: "/settings",
   },
@@ -65,12 +60,12 @@ const NavDash = () => {
       <NavbarContent justify="end">
         <NavbarItem>
           <Button isIconOnly variant="light" onPress={toggleDarkMode}>
-            {isDarkMode ? <Icons.moon /> : <Icons.sun />}
+            {isDarkMode ? <FaMoon size={20} /> : <FaSun size={20} />}
           </Button>
         </NavbarItem>
         <NavbarItem>
           <Button isIconOnly variant="light">
-            <Icons.user />
+            <FaUser size={20} />
           </Button>
         </NavbarItem>
       </NavbarContent>
@@ -83,7 +78,7 @@ const NavDash = () => {
                 path === item.link ? "text-primary" : ""
               }`}
             >
-              <item.icon />
+              <item.icon size={20} />
               {item.name}
             </span>
           </NavbarMenuItem>
