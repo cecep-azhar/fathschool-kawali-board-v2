@@ -1,34 +1,36 @@
-import React from "react";
+"use client";
 
-export function useTheme() {
-  const [isDarkMode, setIsDarkMode] = React.useState<boolean>(false);
+import { useEffect, useState } from "react";
 
-  React.useEffect(() => {
-    const storedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
+export const useTheme = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-    if (storedTheme === "dark" || (!storedTheme && prefersDark)) {
-      document.documentElement.classList.add("dark");
+  useEffect(() => {
+    // Cek tema dari localStorage atau default ke sistem
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") {
       setIsDarkMode(true);
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove("dark");
       setIsDarkMode(false);
+      document.documentElement.classList.remove("dark");
     }
   }, []);
 
   const toggleDarkMode = () => {
-    if (isDarkMode) {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-      setIsDarkMode(false);
-    } else {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-      setIsDarkMode(true);
-    }
+    setIsDarkMode((prev) => {
+      const newTheme = !prev ? "dark" : "light";
+      localStorage.setItem("theme", newTheme);
+
+      if (newTheme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+
+      return !prev;
+    });
   };
 
   return { isDarkMode, toggleDarkMode };
-}
+};

@@ -2,7 +2,8 @@
 
 import CardInfoCondition from "@/components/fragments/CardInfoCondition";
 import { useGetCondition } from "@/lib/hooks/GET/useCondition";
-import { Card, Tab, Tabs } from "@heroui/react";
+import { Card } from "@nextui-org/react";
+import { Tabs, Tab } from "@nextui-org/react";
 
 const InfoCondition = () => {
   const { Condition } = useGetCondition();
@@ -13,11 +14,11 @@ const InfoCondition = () => {
         <h4>Info Kondisi Sekolah</h4>
         <p>Pantau kondisi lingkungan sekolah secara real-time.</p>
 
-        <Tabs className="mt-4" color="primary" variant="underlined">
-          <Tab title="Kondisi Saat ini" key="kondisi-saat-ini">
+        <Tabs aria-label="Informasi Kondisi" className="mt-4" variant="underlined">
+          <Tab key="kondisi-saat-ini" title="Kondisi Saat Ini">
             <CardInfoCondition {...Condition} />
           </Tab>
-          <Tab isDisabled title="Status Perangkat" key="status-perangkat"></Tab>
+          <Tab key="status-perangkat" title="Status Perangkat" isDisabled />
         </Tabs>
       </div>
 
@@ -27,7 +28,7 @@ const InfoCondition = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
           {[1, 2, 3, 4, 5, 6].map((item) => (
-            <Card className="h-52 shadow-md border" key={item} />
+            <Card key={item} className="h-52 shadow-md border" />
           ))}
         </div>
       </div>

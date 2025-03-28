@@ -44,3 +44,17 @@ h6 {
 ::-webkit-scrollbar {
   display: none;
 }
+
+html {
+  transition: background-color 0.3s ease;
+}
+
+html.dark {
+  background-color: #121212;
+  color: white;
+}
+
+html.dark body {
+  background-color: #121212;
+  color: white;
+}
