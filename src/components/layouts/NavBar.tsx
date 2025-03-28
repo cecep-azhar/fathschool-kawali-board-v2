@@ -5,25 +5,22 @@ import { useGetData } from "@/lib/hooks/GET/useGetData";
 import { getCurrentDate, getCurrentTime } from "@/lib/utils/moment";
 import Image from "next/image";
 import Marquee from "react-fast-marquee";
-import { FiRefreshCw } from "react-icons/fi"; // Import ikon refresh
+import { FiRefreshCw, FiMonitor } from "react-icons/fi"; // Import ikon dari react-icons
 import {
   Modal,
   ModalBody,
   ModalContent,
   useDisclosure,
 } from "@nextui-org/react";
-import { Monitor } from "lucide-react";
 import Link from "next/link";
 
 export const NavBar = () => {
   const { data } = useGetData("others");
   const quotes = data?.data?.data?.quote_of_the_day;
-  const { isOpen, onOpen, onClose } = useDisclosure(); // State untuk modal
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  // Gunakan state untuk memastikan modal hanya muncul sekali
   const [hasOpenedModal, setHasOpenedModal] = useState(false);
 
-  // Saat halaman pertama kali dimuat, tampilkan modal
   useEffect(() => {
     if (!hasOpenedModal) {
       onOpen();
@@ -31,8 +28,8 @@ export const NavBar = () => {
     }
   }, [hasOpenedModal, onOpen]);
 
-  // Gabungkan quotes menjadi satu string untuk Marquee
-  const marqueeText = quotes?.join("  •  ") || "Selamat datang di SMKN 1 Kawali!";
+  const marqueeText =
+    quotes?.join("  •  ") || "Selamat datang di SMKN 1 Kawali!";
 
   return (
     <nav className="bg-zinc-900 shadow-xl px-8">
@@ -48,19 +45,18 @@ export const NavBar = () => {
           <h5>SMKN 1 Kawali</h5>
         </div>
 
-        {/* Marquee Text (Hanya Tampil di Layar Lebar) */}
+        {/* Marquee Text (Desktop) */}
         <div className="w-full lg:w-2/5 sm:hidden lg:block">
           <Marquee speed={50} gradient={false}>
             {marqueeText}
           </Marquee>
         </div>
 
-        {/* Waktu & Refresh Icon */}
+        {/* Waktu & Tombol Refresh */}
         <div className="flex items-center gap-4">
           <p className="text-center line-clamp-1">
             {getCurrentTime() + " | " + getCurrentDate()}
           </p>
-          {/* Tombol Refresh */}
           <button
             onClick={onOpen}
             className="p-2 rounded-full bg-gradient-to-r from-[#5A9BFF] to-[#3036A0] hover:opacity-80 transition"
@@ -70,7 +66,7 @@ export const NavBar = () => {
         </div>
       </div>
 
-      {/* Marquee Text (Untuk Layar Kecil) */}
+      {/* Marquee Text (Mobile) */}
       <div className="w-full hidden sm:block mt-4 lg:hidden">
         <Marquee speed={50} gradient={false}>
           {marqueeText}
@@ -89,26 +85,26 @@ export const NavBar = () => {
             <div className="grid grid-cols-3 gap-10 mt-6 px-6">
               {/* Absensi */}
               <Link href="/" className="w-full">
-                <div className="cursor-pointer rounded-2xl p-8 shadow-lg flex flex-col items-center w-full h-56 sm:h-64 flex-grow bg-gradient-to-r from-[#5A9BFF] to-[#3036A0] text-white hover:opacity-90 transition">
-                  <Monitor className="w-24 h-24 sm:w-28 sm:h-28 text-white" />
+                <div className="cursor-pointer rounded-2xl p-8 shadow-lg flex flex-col items-center w-full h-56 sm:h-64 bg-gradient-to-r from-[#5A9BFF] to-[#3036A0] text-white hover:opacity-90 transition">
+                  <FiMonitor size={90} className="text-white" />
                   <p className="mt-6 text-xl sm:text-2xl font-bold">Absensi</p>
                 </div>
               </Link>
 
               {/* KBM */}
               <Link href="/kbm" className="w-full">
-                <div className="cursor-pointer rounded-2xl p-8 shadow-lg flex flex-col items-center w-full h-56 sm:h-64 flex-grow bg-gradient-to-r from-[#5A9BFF] to-[#3036A0] text-white hover:opacity-90 transition">
-                  <Monitor className="w-24 h-24 sm:w-28 sm:h-28 text-white" />
+                <div className="cursor-pointer rounded-2xl p-8 shadow-lg flex flex-col items-center w-full h-56 sm:h-64 bg-gradient-to-r from-[#5A9BFF] to-[#3036A0] text-white hover:opacity-90 transition">
+                  <FiMonitor size={90} className="text-white" />
                   <p className="mt-6 text-xl sm:text-2xl font-bold">KBM</p>
                 </div>
               </Link>
 
               {/* IoT */}
               <Link href="/iot" className="w-full">
-              <div className="cursor pointer rounded-2xl p-8 shadow-lg flex flex-col items-center w-full h-56 sm:h-64 flex-grow bg-gradient-to-r from-[#5A9BFF] to-[#3036A0] text-white">
-                <Monitor className="w-24 h-24 sm:w-28 sm:h-28 text-white" />
-                <p className="mt-6 text-xl sm:text-2xl font-bold">IoT</p>
-              </div>
+                <div className="cursor-pointer rounded-2xl p-8 shadow-lg flex flex-col items-center w-full h-56 sm:h-64 bg-gradient-to-r from-[#5A9BFF] to-[#3036A0] text-white hover:opacity-90 transition">
+                  <FiMonitor size={90} className="text-white" />
+                  <p className="mt-6 text-xl sm:text-2xl font-bold">IoT</p>
+                </div>
               </Link>
             </div>
           </ModalBody>
